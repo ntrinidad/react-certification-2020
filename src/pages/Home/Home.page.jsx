@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import useApi from '../../utils/hooks/useApi';
+
 import { useAuth } from '../../providers/Auth';
 import './Home.styles.css';
 
@@ -8,6 +10,9 @@ function HomePage() {
   const history = useHistory();
   const sectionRef = useRef(null);
   const { authenticated, logout } = useAuth();
+  const { data } = useApi('search', 'wizeline');
+
+  console.log(data);
 
   function deAuthenticate(event) {
     event.preventDefault();
@@ -16,23 +21,25 @@ function HomePage() {
   }
 
   return (
-    <section className="homepage" ref={sectionRef}>
-      <h1>Hello stranger!</h1>
-      {authenticated ? (
-        <>
-          <h2>Good to have you back</h2>
-          <span>
+    <>
+      <section className="navbar">
+        {authenticated ? (
+          <>
+            <Link to="/secret"> Favorites </Link>
             <Link to="/" onClick={deAuthenticate}>
-              ← logout
+              ← Logout
             </Link>
-            <span className="separator" />
-            <Link to="/secret">show me something cool →</Link>
-          </span>
-        </>
-      ) : (
-        <Link to="/login">let me in →</Link>
-      )}
-    </section>
+          </>
+        ) : (
+          <Link to="/login">Login →</Link>
+        )}
+      </section>
+      <section className="homepage" ref={sectionRef}>
+        {/* data && data.items.map((value, index) => {
+        return <img key={index} src={value.snippet.thumbnails.medium.url} alt="img"/>
+      }) */}
+      </section>
+    </>
   );
 }
 
