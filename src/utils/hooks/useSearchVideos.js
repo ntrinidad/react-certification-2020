@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import API from '../../API';
 
-const useApi = (endpoint, param) => {
+/* onst useApi = (endpoint, param) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
 
@@ -35,6 +35,21 @@ const useApi = (endpoint, param) => {
   console.log('DATA', data);
 
   return { isLoading, data };
+}; */
+
+const useSearchVideos = () => {
+  const [videos, setVideos] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const getVideos = (searchText) => {
+    setLoading(true);
+
+    API.searchVideos(searchText).then((videosList) => {
+      setVideos(videosList);
+      setLoading(false);
+    });
+  };
+  return [videos, getVideos, loading];
 };
 
-export default useApi;
+export default useSearchVideos;

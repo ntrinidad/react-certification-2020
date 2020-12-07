@@ -1,5 +1,9 @@
 .homepage {
   text-align: center;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .homepage h1 {
@@ -7,12 +11,11 @@
   letter-spacing: -2px;
 }
 
-.navbar {
-  position: fixed;
-  display: block;
-  top: 0;
-  left: 0;
-  height: 65px;
-  width: 100vw;
-  text-align: right;
+.react-logo {
+  height: 100px;
+}
+
+.enter-button {
+  padding: 10px 20px;
+  border-radius: 3px;
 }
